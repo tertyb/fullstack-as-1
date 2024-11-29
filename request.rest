@@ -1,0 +1,22 @@
+###
+
+GET http://localhost:5000/api/post?sender=674a057d5fc1cef2533b41c7
+
+###
+
+GET http://localhost:5000/api/post/674a057d5fc1cef2533b41c7
+
+###
+
+GET http://localhost:5000/api/post/all
+
+
+###
+
+POST http://localhost:5000/api/post/create?sender=674a057d5fc1cef2533b41c7
+content-type: application/json
+
+{
+    "text": "sample",
+    "image": "hello.png"
+}
