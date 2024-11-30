@@ -3,42 +3,28 @@ import CommentModel from '../models/comment.model';
 import { addCommentsPost, deleteCommentsPost, getPostById } from './post.service';
 
 export const deleteComment = async (commentId: string, postId: string) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
     try {
-        // Insert into first model
-        await CommentModel.deleteOne({ _id: commentId }, {session});
-
-        await deleteCommentsPost(postId, commentId, session);
-        await session.commitTransaction();
+        
+        await CommentModel.deleteOne({ _id: commentId });
+        await deleteCommentsPost(postId, commentId);
         return 'delete comment sucssfully';
 
     } catch (error) {
-        await session.abortTransaction();
-        console.error('Transaction failed:', error);
         throw new Error('could not delete comment');
-    } finally {
-        session.endSession();
     }
 }
 
 export const createComment = async (userId: string, text: string, postId: string) => {
     const now = new Date();
-    const session = await mongoose.startSession();
-    session.startTransaction();
     try {
-        // Insert into first model
+
         const newComment = new CommentModel({ userId, text, date: now });
-        await newComment.save({session});
-        await addCommentsPost(postId, newComment.id, session);
-        await session.commitTransaction();
+        await newComment.save();
+        await addCommentsPost(postId, newComment.id);
         return 'created comment sucssfully';
 
     } catch (error) {
-        await session.abortTransaction();
         throw new Error('could not create comment');
-    } finally {
-        session.endSession();
     }
 }
 

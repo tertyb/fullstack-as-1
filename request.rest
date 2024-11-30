@@ -46,7 +46,7 @@ POST http://localhost:5000/api/comment/create
 content-type: application/json
 
 {
-    "text": "add-comment-check-ttransition-after-chnages",
+    "text": "add-comment-without-t",
     "userId": "674a057d5fc1cef2533b41c7",
     "postId": "674afdde5e608fbfde964844"
 }
@@ -59,7 +59,7 @@ DELETE http://localhost:5000/api/comment/delete
 content-type: application/json
 
 {
-    "commentId": "674b027c3ce17262c85b37b5",
+    "commentId": "674b13a1103887c6283e2afa",
     "postId": "674afdde5e608fbfde964844"
 }
 

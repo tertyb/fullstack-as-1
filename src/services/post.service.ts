@@ -36,12 +36,12 @@ export const updatePost = async (postId: string, updateData: { text?: string, im
     return updatedPost;
 }
 
-export const addCommentsPost = async (postId: string, commentId: string, session: ClientSession) => {
+export const addCommentsPost = async (postId: string, commentId: string) => {
 
     const updatedPost = await PostModel.findOneAndUpdate(
          { _id: postId},
         { $addToSet: {commentsIds: commentId} },
-        { new: true, runValidators: true, session }
+        { new: true, runValidators: true }
     );
 
     if (!updatedPost) {
@@ -51,12 +51,12 @@ export const addCommentsPost = async (postId: string, commentId: string, session
     return updatedPost;
 }
 
-export const deleteCommentsPost = async (postId: string, commentId: string, session: ClientSession) => {
+export const deleteCommentsPost = async (postId: string, commentId: string) => {
 
     const updatedPost = await PostModel.findOneAndUpdate(
          {_id: postId},
         { $pull: {commentsIds: commentId} },
-        { new: true, runValidators: true, session }
+        { new: true, runValidators: true }
     );
 
     if (!updatedPost) {

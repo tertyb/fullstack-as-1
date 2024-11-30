@@ -20,7 +20,7 @@ commentRouter.delete('/delete', async (req, res) => {
   try {
 
     const { postId, commentId } = req.body;
-    const message = await deleteComment(postId, commentId);
+    const message = await deleteComment(commentId, postId);
 
     res.json({ message });
 
