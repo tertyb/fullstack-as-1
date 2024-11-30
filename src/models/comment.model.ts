@@ -6,12 +6,15 @@ export interface IComment extends Document {
   date: Date;
 }
 
-export const CommentSchema = new Schema<IComment>({
+ const CommentSchema = new Schema<IComment>({
   userId: { type: String, required: true },
   text: { type: String, required: true },
   date: { type: Date, required: false }
 });
 
+const CommentModel = mongoose.model<IComment>('Comment', CommentSchema);
+
+export default CommentModel;
  
 
 

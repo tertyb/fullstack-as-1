@@ -20,3 +20,61 @@ content-type: application/json
     "text": "sample",
     "image": "hello.png"
 }
+
+###
+PUT http://localhost:5000/api/post/674afdde5e608fbfde964844/update
+content-type: application/json
+
+{
+    "text": "sample-updated2",
+    "image": "hello2.png"
+}
+
+
+
+//comments api
+
+
+//get comments by post id
+###
+GET http://localhost:5000/api/post/674afdde5e608fbfde964844/comments
+
+
+//create comment to post
+###
+POST http://localhost:5000/api/comment/create
+content-type: application/json
+
+{
+    "text": "add-comment-check-ttransition-after-chnages",
+    "userId": "674a057d5fc1cef2533b41c7",
+    "postId": "674afdde5e608fbfde964844"
+}
+
+
+//delete comment to post
+###
+
+DELETE http://localhost:5000/api/comment/delete
+content-type: application/json
+
+{
+    "commentId": "674b027c3ce17262c85b37b5",
+    "postId": "674afdde5e608fbfde964844"
+}
+
+
+//get specific comment
+###
+GET http://localhost:5000/api/comment/674b027c3ce17262c85b37b5
+
+
+//update comment
+###
+PUT http://localhost:5000/api/comment/update
+content-type: application/json
+
+{
+    "text": "updated-comment1",
+    "commentId": "674b027c3ce17262c85b37b5"
+}

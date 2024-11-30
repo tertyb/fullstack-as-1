@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
-import { allPosts, createPost, getPostById, getPostsBysenderId } from '../services/post.service';
+import { allPosts, createPost, getPostById, getPostsBysenderId, updatePost } from '../services/post.service';
+import { allCommentsByPostId } from '../services/comment.service';
 
 export const postRouter = Router();
 
@@ -63,6 +64,43 @@ postRouter.get('/:postId', async (req: Request, res: Response) => {
   }
 });
 
-// TODO: daniel add update post
+postRouter.put('/:postId/update', async (req: Request, res: Response) => {
+  try {
+    if (req?.params?.postId) {
+      const postId = req?.params?.postId;
+      const { text, image, } = req.body;
+
+      if (!text && !image) {
+        throw new Error('no text or image provided')
+      }
+
+      const updateData: { text?: string, image?: string } = {};
+      if (text) updateData.text = text;
+      if (image) updateData.image = image;
+
+      await updatePost(postId, updateData);
+
+      const message = " 'Post updated successfully'";
+      res.json({ message });
+    } else {
+      throw new Error('postId not provided')
+    }
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+postRouter.get('/:postid/comments', async (req: Request, res: Response) => {
+  try {
+    if(req?.params?.postid) {
+      const postId = req?.params?.postid;
+
+      const comments = await allCommentsByPostId(postId);
+      res.json(comments)
+    }
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 
