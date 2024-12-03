@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createComment, deleteComment, findCommentsById, updateComment } from "../services/comment.service";
+import { createComment, deleteComment, findCommentById, updateComment } from "../services/comment.service";
 
 export const commentRouter = Router();
 
@@ -46,7 +46,7 @@ commentRouter.get('/:commentid', async (req, res) => {
   try {
     if(req?.params?.commentid) {
       const commentId = req?.params?.commentid;
-      const comment = await findCommentsById(commentId);
+      const comment = await findCommentById(commentId);
       res.json({ comment });
     }
 

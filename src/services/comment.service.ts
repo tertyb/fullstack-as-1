@@ -4,7 +4,7 @@ import { addCommentsPost, deleteCommentsPost, getPostById } from './post.service
 
 export const deleteComment = async (commentId: string, postId: string) => {
     try {
-        
+
         await CommentModel.deleteOne({ _id: commentId });
         await deleteCommentsPost(postId, commentId);
         return 'delete comment sucssfully';
@@ -34,17 +34,22 @@ export const updateComment = async (text: string, commentId: string) => {
         date: updatedDate,
         text
     };
+    let updatedComment;
+    try {
 
-    const updatedComment = await CommentModel.findByIdAndUpdate(
-        {_id: commentId},
-       { $set: updateData },
-       { new: true, runValidators: true }
-   );
+        updatedComment = await CommentModel.findByIdAndUpdate(
+            { _id: commentId },
+            { $set: updateData },
+            { new: true, runValidators: true }
+        );
 
-   if (!updatedComment) {
-    throw new Error('Post not found');
+        if (!updatedComment) {
+            throw new Error('Post not found');
+        }
+
+    } catch (error) {
+        throw new Error('failed to update comment')
     }
-
     return 'updated comment sucssfully';
 }
 
@@ -55,7 +60,10 @@ export const allCommentsByPostId = async (postId: string) => {
 }
 
 export const findCommentsByIds = async (commentIds: string[]) => await CommentModel.find({ _id: { $in: commentIds } });
-export const findCommentsById = async (commentId: string) => await CommentModel.find({ _id: commentId });
+export const findCommentById = async (commentId: string) => {
+    if (!mongoose.isValidObjectId(commentId)) throw new Error('invalid id');
+    return await CommentModel.findById(commentId);
+}
 
 
 

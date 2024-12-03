@@ -22,11 +22,11 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:5000/api/post/674afdde5e608fbfde964844/update
+PUT http://localhost:5000/api/post/674afdde5e608fbfde9648441/update
 content-type: application/json
 
 {
-    "text": "sample-updated2",
+    "text": "sample-updated3",
     "image": "hello2.png"
 }
 
@@ -46,7 +46,7 @@ POST http://localhost:5000/api/comment/create
 content-type: application/json
 
 {
-    "text": "add-comment-without-t",
+    "text": "add-comment-without-t11111",
     "userId": "674a057d5fc1cef2533b41c7",
     "postId": "674afdde5e608fbfde964844"
 }
@@ -75,6 +75,6 @@ PUT http://localhost:5000/api/comment/update
 content-type: application/json
 
 {
-    "text": "updated-comment1",
+    "text": "updated-comment123",
     "commentId": "674b027c3ce17262c85b37b5"
 }

@@ -80,7 +80,7 @@ postRouter.put('/:postId/update', async (req: Request, res: Response) => {
 
       await updatePost(postId, updateData);
 
-      const message = " 'Post updated successfully'";
+      const message = " Post updated successfully";
       res.json({ message });
     } else {
       throw new Error('postId not provided')
