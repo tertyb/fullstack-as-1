@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import { CommentSchema, IComment } from './comment.model';
 
 export interface IPost extends Document {
   senderId: string;
@@ -7,7 +6,7 @@ export interface IPost extends Document {
   date: Date;
   image: string;
   likes: string[];
-  comments: IComment[];
+  commentsIds: string[];
 }
 
 const PostSchema = new Schema<IPost>({
@@ -25,7 +24,7 @@ const PostSchema = new Schema<IPost>({
       message: "Likes array must have unique values.",
     },
   },
-  comments: { type: [CommentSchema], required: false },
+  commentsIds: { type: [String], required: false },
 });
 
 const PostModel = mongoose.model<IPost>('Post', PostSchema);

@@ -4,6 +4,7 @@ import { config } from './config/config';
 import dotenv from 'dotenv'
 import connectDB from './config/db';
 import { postRouter } from './controllers/post.controller';
+import { commentRouter } from './controllers/comment.controller';
 
 const app = express();
 const PORT = config.PORT;
@@ -16,6 +17,7 @@ dotenv.config();
 app.use(cors());
 
 app.use('/api/post', postRouter);
+app.use('/api/comment', commentRouter);
 
 connectDB()
 
